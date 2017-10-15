@@ -1,5 +1,7 @@
 sudo: required
 services:
   - docker
+env:
+  - DOCKERFILE=Dockerfile.openjdk-8-alpine
 script:
-- docker build -t osh-core:${TRAVIS_COMMIT} .
+- docker build -t osh-core:${TRAVIS_BRANCH} -f ${DOCKERFILE} .
