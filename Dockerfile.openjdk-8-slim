@@ -1,0 +1,19 @@
+FROM docker.io/openjdk:8-jdk-slim
+MAINTAINER ashmastaflash
+
+RUN apt-get update && \
+    apt-get install -y \
+        bash \
+        git
+
+RUN mkdir /app
+COPY ./ /app/
+ENV OSH_RUNNER=/app/run_osh.sh
+
+RUN cd /app/ && \
+    ./gradlew
+
+EXPOSE 8181
+
+ENTRYPOINT /bin/bash
+CMD /app/launch.sh
