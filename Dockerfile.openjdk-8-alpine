@@ -1,4 +1,4 @@
-FROM openjdk:8u131-jdk-alpine
+FROM docker.io/openjdk:8-jdk-alpine
 MAINTAINER ashmastaflash
 
 RUN apk add -U \
@@ -10,7 +10,7 @@ COPY ./ /app/
 ENV OSH_RUNNER=/app/run_osh.sh
 
 RUN cd /app/ && \
-    ./gradlew
+    ./gradlew build
 
 EXPOSE 8181
 
