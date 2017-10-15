@@ -2,6 +2,6 @@ sudo: required
 services:
   - docker
 env:
-  - DOCKERFILE=Dockerfile.openjdk-8-alpine
+  - BUILD_SUFFIX=openjdk-8-alpine
 script:
-- docker build -t osh-core:${TRAVIS_BRANCH} -f ${DOCKERFILE} .
+- docker build -t osh-core:${TRAVIS_BRANCH}-${BUILD_SUFFIX} -f Dockerfile.${BUILD_SUFFIX} .
