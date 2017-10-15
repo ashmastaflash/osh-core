@@ -1,4 +1,5 @@
 sudo: required
-language: java
-jdk:
-  - oraclejdk8
+services:
+  - docker
+script:
+- docker build -t osh-core:${TRAVIS_COMMIT} .
