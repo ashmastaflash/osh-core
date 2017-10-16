@@ -11,7 +11,7 @@ COPY ./ /app/
 ENV OSH_RUNNER=/app/run_osh.sh
 
 RUN cd /app/ && \
-    ./gradlew tasks \
+    ./gradlew tasks && \
     ./gradlew build
 
 EXPOSE 8181
