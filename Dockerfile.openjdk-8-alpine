@@ -5,15 +5,16 @@ RUN apk add -U \
     bash \
     git
 
+
 RUN mkdir /src
 RUN mkdir /app
 
 COPY ./ /src/
-ENV OSH_RUNNER=/app/run_osh.sh
 
 RUN cd /src/ && \
     ./gradlew tasks && \
     ./gradlew build && \
+    ls /src/build/ && \
     export OSH_VER=`ls /src/build/distribution/*zip | head -1 | awk -F- '{print $3}' | sed 's/.zip//g'` && \
     echo "OSH Version: ${OSH_VER}" && \
     mv /src/build/distribution/osh-core-${OSH_VER}.zip \
