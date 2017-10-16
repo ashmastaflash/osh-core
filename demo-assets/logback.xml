@@ -31,3 +31,4 @@
   </logger>
   <logger name="org.eclipse.jetty" level="warn" />
   <logger name="org.vast" level="warn"/>
+</configuration>
