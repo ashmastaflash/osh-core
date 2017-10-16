@@ -7,9 +7,9 @@ RUN apt-get update && \
         git
 
 RUN mkdir /src/
-RUN mkdir /app
+RUN mkdir /app/
 
-COPY ./ /app/
+COPY ./ /src/
 ENV OSH_RUNNER=/app/run_osh.sh
 
 RUN cd /src/ && \
