@@ -10,9 +10,20 @@ RUN mkdir /app
 COPY ./ /app/
 ENV OSH_RUNNER=/app/run_osh.sh
 
-RUN cd /app/ && \
+RUN cd /src/ && \
     ./gradlew tasks && \
-    ./gradlew build
+    ./gradlew build && \
+    export OSH_VER=`ls /src/build/distribution/*zip | head -1 | awk -F- '{print $3}' | sed 's/.zip//g'` && \
+    echo "OSH Version: ${OSH_VER}" && \
+    mv /src/build/distribution/osh-core-${OSH_VER}.zip \
+       /app/osh-core.zip && \
+    cd /app/ && \
+    unzip ./osh-core.zip && \
+    mv ./osh-core-${OSH_VER} ./osh-core && \
+    cp /src/demo-assets/config.json \
+       /src/demo-assets/logback.xml \
+       /src/demo-assets/launch.sh \
+       /app/osh-core/
 
 EXPOSE 8181
 
