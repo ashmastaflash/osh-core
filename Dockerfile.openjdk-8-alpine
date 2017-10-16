@@ -14,7 +14,7 @@ COPY ./ /src/
 RUN cd /src/ && \
     ./gradlew tasks && \
     ./gradlew build && \
-    ls /src/build/ && \
+    ls /src/ && \
     export OSH_VER=`ls /src/build/distribution/*zip | head -1 | awk -F- '{print $3}' | sed 's/.zip//g'` && \
     echo "OSH Version: ${OSH_VER}" && \
     mv /src/build/distribution/osh-core-${OSH_VER}.zip \
