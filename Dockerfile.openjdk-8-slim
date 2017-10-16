@@ -6,7 +6,9 @@ RUN apt-get update && \
         bash \
         git
 
+RUN mkdir /src/
 RUN mkdir /app
+
 COPY ./ /app/
 ENV OSH_RUNNER=/app/run_osh.sh
 
