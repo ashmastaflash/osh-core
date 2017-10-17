@@ -1,8 +1,16 @@
 sudo: required
 services:
-  - docker
+- docker
 env:
+  matrix:
   - BUILD_SUFFIX=openjdk-8-alpine
   - BUILD_SUFFIX=openjdk-8-slim
+  global:
+  - secure: n//Iw+fbnm44SmqwNFiUzupjIng0IhpoZmuuJXSV5TzhKDgt8FVVQdXdPY9LAYO6TiAS2FLAD4C1w03SGNB1Ajac3w2uznYP5gPuTnCL1yPfOIGVT+XwSSBR1iit99tdutQOLAQzPcPkG2yqCM9szyIHPXYOzPkgskqkWKRtT5tyndYASFa9p5WavDUJCuSaAiZ0ErqM/UMOz1A/i+XNA8Ms6ali+APxikLVOd/vh+ysm6VeF+rtAg8nWXCYtjyBuhwJY/Zr3MVuomVIQldJ4768tmy/OBmTNlueIthX3zt7bicytMcadFWxrMM40NwtOxcJjAAay4IHpxJSiZhdzZ71BenB6ldcKQf3Y0FN623wmJGFdJeuWdq9v5PhmLueu4hn4fDUxbXbMxcUxHJEiqohrM8/+2c4ZxQ5oPjjKLIpppxaTWjBPrbwFOm9TmUPL30mMegLTgI2C10mgxTs2HZV8lCUO8aEeQ3Dy9aBax+NX0QYMGRDD7+yuIQRYekwmE7zfQjDYr6hlbgxP0ri2Y9KGKJIRabzmPwiXaYvADHB26YtTY9/IVnFpUPjLoFoBvf5KQnhq9HIN7pnb5g+xUONWJM/exGMUlISsZoJcDaP5HMLNBW5kJkoLjDbDOn9bUtsBa4lQv15Nc73KiuQgaEJI5/+H+WRB9q4+3V5x54=
+  - secure: Aja+DGWtXVBk423UynOwsluQChXRdciMvKL2+Or5PxQcMhBb79dfUwmqg2pI4k7OhK+KwLLHugUmjKZEpzoIk8UWI0lr87ib1sDldBez7eASKWxxV8Qosnn0Z+hE0Qmigtdg1QYUDQcv63g7nKmv02SqFKj/080C318oVxQ/dQGi5QJE28GkWLAsxnOBsIIKhLQhOqpki+5Z+lD9KowKf5UqnoNhNc86MNjMe/QEm725CxcakUmVvwVsqgE3ilgNAEsnw6ejNQbihUwx6Nsu/xvSiakrP0ccoI3iuxX4G1RPbLgKHnr4EF2eP+FaUinE07PRFOOZYzZsezgFbIrFrpDoWAbSvQoPWmWOawLEgII9w2OyPy5dGNqhsQ7RF2Z7wIKg/dVOxWoxYCufxBkfyj4GtL25Nbg5FN7q5rz5kIEjHiqxtRgP9wAdLm6lC5HigrBApBdgJaAg3LnSb+08EW6uncHpvxeZVDa0CvHt6L0sRKho0ZS6CuMDnMw4qLPTXVgJ47porKk1rCUdxMNEB42+J/C6Ts80YRw+IwZPZ7IrdUKdWsgr1CRMYvpswMTRdRTzLKwKpLwmjy4lz8JOf7++xJejzo2WuH5NGV1JRo3MnAATtTLU4nVdm1RaaDF3V9vFb3VyTleefXL/I7PXE9E2kuWXHdVgbw6ZqKxo3lY=
 script:
-- docker build -t osh-core:${TRAVIS_BRANCH}-${BUILD_SUFFIX}-demo -f Dockerfile.${BUILD_SUFFIX} .
+- export FULL_IMAGE_NAME=${DOCKER_USER}/osh-core:${TRAVIS_BRANCH}-${BUILD_SUFFIX}-demo
+- docker build -t ${FULL_IMAGE_NAME} -f Dockerfile.${BUILD_SUFFIX} .
+after_success:
+- docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+- docker push ${DOCKER_USER}/osh-core:${TRAVIS_BRANCH}-${BUILD_SUFFIX}-demo
