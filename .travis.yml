@@ -5,4 +5,4 @@ env:
   - BUILD_SUFFIX=openjdk-8-alpine
   - BUILD_SUFFIX=openjdk-8-slim
 script:
-- docker build -t osh-core:${TRAVIS_BRANCH}-${BUILD_SUFFIX} -f Dockerfile.${BUILD_SUFFIX} .
+- docker build -t osh-core:${TRAVIS_BRANCH}-${BUILD_SUFFIX}-demo -f Dockerfile.${BUILD_SUFFIX} .
