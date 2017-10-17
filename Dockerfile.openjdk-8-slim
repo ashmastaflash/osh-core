@@ -28,5 +28,5 @@ RUN cd /src/ && \
 
 EXPOSE 8181
 
-ENTRYPOINT /bin/bash
-CMD /app/launch.sh
+WORKDIR /app/osh-core
+CMD /app/osh-core/launch.sh
