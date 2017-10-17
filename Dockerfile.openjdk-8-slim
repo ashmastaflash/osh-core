@@ -1,6 +1,8 @@
 FROM docker.io/openjdk:8-jdk-slim
 MAINTAINER ashmastaflash
 
+ENV CONFIG_FILE=/app/osh-core/config.json
+
 RUN apt-get update && \
     apt-get install -y \
         bash \
